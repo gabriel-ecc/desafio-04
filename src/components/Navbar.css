@@ -1,0 +1,9 @@
+.navbar{
+    display: flex;
+    align-items: center;
+}
+
+p{
+    color: var(--color0);
+    margin-top: 1rem;
+}

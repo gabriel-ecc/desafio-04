@@ -16,10 +16,7 @@ min-height: 100vh;
 
 }
 
-
-
 .contenedor {
-  width: 1000px;
   margin: 0 auto;
 }
 
@@ -27,3 +24,4 @@ min-height: 100vh;
   background-color: var(--color3);
   border-radius:  0.5rem 0.5rem 0 0;
 }
+

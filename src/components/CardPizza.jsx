@@ -10,7 +10,7 @@ const CardPizza = ({name, price, ingredients, url}) => {
     
 
     return (
-        <div className="card w-50">
+        <div className="card w-25">
             <img className="card-img-top" src={url} alt={name}/>
             <div className="card-body">
                 <h5 className="card-title">{name}</h5>

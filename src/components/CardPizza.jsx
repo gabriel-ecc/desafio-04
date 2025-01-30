@@ -1,6 +1,7 @@
-const CardPizza = () => {
+const CardPizza = ({name, price, ingredients, img}) => {
     return (
         <>
+        {name}
         </>
     );
 }

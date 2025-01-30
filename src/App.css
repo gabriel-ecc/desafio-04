@@ -7,7 +7,7 @@
 --color5: rgba(140, 74, 74, 1);
 
 background-color: var(--color5);
-height: 100vh;
+min-height: 100vh;
 }
 
 *{
@@ -19,10 +19,11 @@ height: 100vh;
 
 
 .contenedor {
-  width: 700px;
+  width: 1000px;
   margin: 0 auto;
 }
 
-img{
-  width: 700px;
+.home-background{
+  background-color: var(--color3);
+  border-radius:  0.5rem 0.5rem 0 0;
 }

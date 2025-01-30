@@ -1,4 +1,3 @@
-import { Button } from 'react-bootstrap';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -9,9 +8,9 @@ const Navbar = () => {
     return (
         <section className='navbar'>
             <p>Pizzería Mamma Mia!</p>
-            <Button type="button" className="btn">Home</Button>
+            <a href="#" className="btn btn-primary">Home</a>
             {token?botonesTrue():botonesFalse()}
-            <Button>Total: ${total.toLocaleString('es-cl')}</Button>
+            <a href="#" className="btn btn-primary">Total: ${total.toLocaleString('es-cl')}</a>
         </section>
     );
 }
@@ -20,8 +19,8 @@ export default Navbar;
 const botonesTrue = () =>{
     return (
         <>
-        <Button>Profile</Button>
-        <Button>Logout</Button>
+        <a href="#" className="btn btn-primary">Profile</a>
+        <a href="#" className="btn btn-primary">Logout</a>
         </>
     );
 }
@@ -29,8 +28,8 @@ const botonesTrue = () =>{
 const botonesFalse = () =>{
     return (
         <>
-        <Button>Log In</Button>
-        <Button>Registrer</Button>
+        <a href="#" className="btn btn-primary">Log In</a>
+        <a href="#" className="btn btn-primary">Registrer</a>
         </>
     );
 }

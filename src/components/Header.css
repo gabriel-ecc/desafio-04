@@ -6,7 +6,7 @@
     width: 100%; /* Ajusta el ancho de la imagen según necesites */
     height: auto; 
     opacity: 0.50;
-    border-radius: 1rem;
+    border-radius: 0 0 1rem 1rem;
   }
   
   .header-text {

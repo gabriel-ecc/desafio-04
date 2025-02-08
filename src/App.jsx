@@ -15,8 +15,8 @@ function App() {
         <div className='col'>
           <Navbar/>
           {/* <Home/> */}
-          <Register/>
-          {/* <Login/> */}
+          {/* <Register/> */}
+          <Login/>
           <Footer/>
         </div>
       </div>

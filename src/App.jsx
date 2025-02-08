@@ -9,8 +9,8 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <div className='container'>
-      <div class='row align-items-start'>
-        <div class='col'>
+      <div className='row align-items-start'>
+        <div className='col'>
           <Navbar></Navbar>
           <Home></Home>
           <Footer></Footer>

@@ -14,9 +14,9 @@ function App() {
       <div className='row align-items-start'>
         <div className='col'>
           <Navbar/>
-          {/* <Home/> */}
+          <Home/>
           {/* <Register/> */}
-          <Login/>
+          {/* <Login/> */}
           <Footer/>
         </div>
       </div>

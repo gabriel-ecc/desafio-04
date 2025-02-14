@@ -1,25 +1,21 @@
-const CardPizza = ({ name, price, ingredients, url }) => {
-  let textoIngredientes = "";
-  for (let i = 0; i < ingredients.length; i++) {
-    textoIngredientes += ingredients[i];
-    if (i < ingredients.length - 1) {
-      textoIngredientes += ", ";
-    }
-  }
-  textoIngredientes += ".";
-
+const CardPizza = ({ id, name, price, ingredients, desc, url }) => {
   return (
-    <div className='card col-12 col-sm-6 col-md-4 col-lg-3 mb-4'>
+    <div className='card col-12 col-sm-6 col-md-4 mb-4' Key={id}>
       <img src={url} className='card-img-top' alt={name} />
       <div className='card-body'>
         <h5 className='card-title fw-semibold fs-5'>Pizza {name}</h5>
       </div>
       <ul className='list-group list-group-flush'>
-        <li className='list-group-item'>
-          <p className='card-text text-center'>Ingredientes:</p>
-          <p className='card-text text-center fs-6'>🍕 {textoIngredientes}</p>
+        <li className='list-group-item' Key={id + "ingr"}>
+          <h5 className='card-text text-center mb-1'>Ingredientes</h5>
+          <p className='card-text text-center fs-6'>
+            <ul className="list-group">{renderIngredients(ingredients)}</ul>
+          </p>
         </li>
-        <li className='list-group-item'>
+        <li className='list-group-item' Key={id + "desc"}>
+          <p className='card-text text-center fs-6'>{desc}</p>
+        </li>
+        <li className='list-group-item' Key={id + "pric"}>
           <p className='text-center fw-semibold fs-3'>
             Precio: ${price.toLocaleString("es-cl")}
           </p>
@@ -37,3 +33,7 @@ const CardPizza = ({ name, price, ingredients, url }) => {
   );
 };
 export default CardPizza;
+
+const renderIngredients = (ingredients) => {
+  return ingredients.map((i) => <li className="list-group-item">🍕 {i}</li>);
+};

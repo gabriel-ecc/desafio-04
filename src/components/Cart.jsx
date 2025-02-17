@@ -17,7 +17,7 @@ const Cart = () => {
   };
 
   const diminuirCantidad = (p) => {
-    if (p.count > 1) {
+    if (p.count > 0) {
       p.count -= 1;
       const nuevaLista = miCarrito.filter((pizza) => pizza.id != p.id);
       setMiCarrito([...nuevaLista, p]);

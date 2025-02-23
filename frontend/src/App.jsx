@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Cart from "./components/Cart";
+import Pizza from "./components/Pizza";
 
 function App() {
   return (
@@ -15,10 +16,11 @@ function App() {
       <div className='row align-items-start'>
         <div className='col'>
           <Navbar/>
-          {/* <Home/> */}
+          <Home/>
           {/* <Register/> */}
           {/* <Login/> */}
-          <Cart/>
+          {/* <Cart/> */}
+          {/* <Pizza/> */}
           <Footer/>
         </div>
       </div>

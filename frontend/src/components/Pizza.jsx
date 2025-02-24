@@ -33,7 +33,7 @@ const Pizza = () => {
               {renderIngredients(pizza.ingredients)}
             </ul>
 
-            <p className='card-text'>${pizza.price}</p>
+            <p className='card-text'>{pizza.price? `$${pizza.price.toLocaleString("es-CL")}`: ""}</p>
             <a href='#' className='btn btn-primary'>
               Añadir
             </a>

@@ -7,7 +7,6 @@ const Home = () => {
   const [listaPizzas, setListaPizzas] = useState([]);
 
   const getPizzas = async (url) => {
-    console.log('hola')
     const res = await fetch(url);
     const data = await res.json();
     return setListaPizzas(data);

@@ -37,6 +37,6 @@ const CardPizza = ({ id, name, price, ingredients, desc, url }) => {
 };
 export default CardPizza;
 
-const renderIngredients = (ingredients) => {
+const renderIngredients = (ingredients = []) => {
   return ingredients.map((i) => <li className='list-group-item'>🍕 {i}</li>);
 };

@@ -16,11 +16,11 @@ function App() {
       <div className='row align-items-start'>
         <div className='col'>
           <Navbar/>
-          <Home/>
+          {/* <Home/> */}
           {/* <Register/> */}
           {/* <Login/> */}
           {/* <Cart/> */}
-          {/* <Pizza/> */}
+          <Pizza/>
           <Footer/>
         </div>
       </div>

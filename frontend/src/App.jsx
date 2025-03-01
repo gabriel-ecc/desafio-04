@@ -3,12 +3,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import Home from "./components/Home";
+import Home from "./pages/Home";
 import Footer from "./components/Footer";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Cart from "./components/Cart";
-import Pizza from "./components/Pizza";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Cart from "./pages/Cart";
+import Pizza from "./pages/Pizza";
 
 function App() {
   return (

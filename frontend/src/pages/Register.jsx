@@ -1,25 +1,30 @@
 import { useState } from "react";
 import "../App.css";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassWord] = useState("");
+  const [password2, setPassWord2] = useState("");
   const [error, setError] = useState(false);
 
   const validarDatos = (e) => {
     e.preventDefault();
 
-    if (email === "desafio@desafio" && password === "desafio") {
-      alert("LogIn Éxito");
-      setError(false);
-      setEmail("");
-      setPassWord("");
-    } else {
-      setError("Datos no son validos");
+    if (email === "" || password === "" || password2 === "") {
+      setError("Todos los datos son necesarios");
       return;
     }
+    if (password !== password2) {
+      setError("Las contraseñas no coinciden");
+      return;
+    }
+    alert("Cuenta Creada con Éxito");
+    setError(false);
+    setEmail("");
+    setPassWord("");
+    setPassWord2("");
   };
 
   return (
@@ -44,16 +49,29 @@ const Login = () => {
             type='password'
             name='pass'
             className='form-control'
+            minLength='6'
             onChange={(e) => setPassWord(e.target.value)}
             value={password}
             required
           />
         </div>
+        <div className='mb-3'>
+          <label className='form-label text-light'>Confirmar Contraseña</label>
+          <input
+            type='password'
+            name='pass2'
+            className='form-control'
+            minLength='6'
+            onChange={(e) => setPassWord2(e.target.value)}
+            value={password2}
+            required
+          />
+        </div>
         <button type='submit' className='btn btn-primary'>
-          🔓 LogIn
+          Enviar
         </button>
       </form>
     </>
   );
 };
-export default Login;
+export default Register;

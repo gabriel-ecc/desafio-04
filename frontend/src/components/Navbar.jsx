@@ -1,3 +1,6 @@
+import { Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   const total = 25000;
   const token = false;
@@ -5,9 +8,10 @@ const Navbar = () => {
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary rounded '>
       <div className='container-fluid'>
-        <a className='navbar-brand' href='#'>
+        <Link to='/' className='navbar-brand'>
           Pizzería Mamma Mia!
-        </a>
+        </Link>
+
         <button
           className='navbar-toggler'
           type='button'
@@ -25,13 +29,12 @@ const Navbar = () => {
                 🍕 Home
               </a>
             </li>
-            {token?botonesTrue():botonesFalse()}
+            {token ? botonesTrue() : botonesFalse()}
           </ul>
           <span className='nav-item'>
-          <a className='nav-link' aria-current='page' href='#'>
-                🛒 Total: ${total.toLocaleString('es-cl')}
-              </a>
-            
+            <a className='nav-link' aria-current='page' href='#'>
+              🛒 Total: ${total.toLocaleString("es-cl")}
+            </a>
           </span>
         </div>
       </div>
@@ -49,7 +52,7 @@ const botonesTrue = () => {
         </a>
       </li>
       <li className='nav-item'>
-        <a className='nav-link' href='#'> 
+        <a className='nav-link' href='#'>
           🚪 Logout
         </a>
       </li>

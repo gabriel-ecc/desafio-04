@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./App.css";
@@ -15,13 +16,11 @@ function App() {
     <div className='container'>
       <div className='row align-items-start'>
         <div className='col'>
-          <Navbar/>
-          {/* <Home/> */}
-          {/* <Register/> */}
-          {/* <Login/> */}
-          {/* <Cart/> */}
-          <Pizza/>
-          <Footer/>
+          <Navbar />
+          <Routes>
+            <Route path='/' element={<Home />} />
+          </Routes>
+          <Footer />
         </div>
       </div>
     </div>

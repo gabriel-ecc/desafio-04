@@ -19,6 +19,11 @@ function App() {
           <Navbar />
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/Home' element={<Home />} />
+            <Route path='/Register' element={<Register />} />
+            <Route path='/Login' element={<Login />} />
+            <Route path='/Cart' element={<Cart />} />
+            <Route path='/Pizza/p001' element={<Pizza />} />
           </Routes>
           <Footer />
         </div>

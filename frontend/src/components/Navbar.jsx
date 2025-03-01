@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const total = 25000;
-  const token = false;
+  const token = true;
 
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary rounded '>
@@ -25,16 +25,16 @@ const Navbar = () => {
         <div className='collapse navbar-collapse' id='navbarText'>
           <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
             <li className='nav-item'>
-              <a className='nav-link' aria-current='page' href='#'>
+              <Link to='/Home' className='nav-link'>
                 🍕 Home
-              </a>
+              </Link>
             </li>
             {token ? botonesTrue() : botonesFalse()}
           </ul>
           <span className='nav-item'>
-            <a className='nav-link' aria-current='page' href='#'>
+            <Link to='/Cart' className='nav-link'>
               🛒 Total: ${total.toLocaleString("es-cl")}
-            </a>
+            </Link>
           </span>
         </div>
       </div>
@@ -47,14 +47,14 @@ const botonesTrue = () => {
   return (
     <>
       <li className='nav-item'>
-        <a className='nav-link' href='#'>
+        <Link to='/Profile' className='nav-link'>
           🧰 Profile
-        </a>
+        </Link>
       </li>
       <li className='nav-item'>
-        <a className='nav-link' href='#'>
+        <Link to='/Logout' className='nav-link'>
           🚪 Logout
-        </a>
+        </Link>
       </li>
     </>
   );
@@ -64,14 +64,14 @@ const botonesFalse = () => {
   return (
     <>
       <li className='nav-item'>
-        <a className='nav-link' href='#'>
+        <Link to='/Login' className='nav-link'>
           🔐 Login
-        </a>
+        </Link>
       </li>
       <li className='nav-item'>
-        <a className='nav-link' href='#'>
+        <Link to='/Register' className='nav-link'>
           🔐 Register
-        </a>
+        </Link>
       </li>
     </>
   );

@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Cart from "./pages/Cart";
 import Pizza from "./pages/Pizza";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path='/Login' element={<Login />} />
             <Route path='/Cart' element={<Cart />} />
             <Route path='/Pizza/p001' element={<Pizza />} />
+            <Route path='*' element={<NotFound />} />
           </Routes>
           <Footer />
         </div>

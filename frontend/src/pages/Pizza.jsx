@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 const Pizza = () => {
-  const urlApi = "http://localhost:5000/api/pizzas/p001";
+  const { id } = useParams();
+
+  const urlApi = "http://localhost:5000/api/pizzas/" + id;
   const [pizza, setPizza] = useState([]);
 
   const getPizzas = async (url) => {
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data);
     return setPizza(data);
   };
 
@@ -26,14 +29,16 @@ const Pizza = () => {
         </div>
         <div className='col-md-8'>
           <div className='card-body'>
-            <h5 className='card-title'>{pizza.name}</h5>
+            <h5 className='card-title text-capitalize'>Pizza {pizza.name}</h5>
             <p className='card-text'>{pizza.desc}</p>
 
             <ul className='list-group'>
               {renderIngredients(pizza.ingredients)}
             </ul>
 
-            <p className='card-text'>{pizza.price? `$${pizza.price.toLocaleString("es-CL")}`: ""}</p>
+            <p className='card-text'>
+              {pizza.price ? `$${pizza.price.toLocaleString("es-CL")}` : ""}
+            </p>
             <a href='#' className='btn btn-primary'>
               Añadir
             </a>

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const CardPizza = ({ id, name, price, ingredients, desc, url }) => {
   return (
     <div className='card col-12 col-sm-6 col-md-4 mb-4' key={id}>
@@ -25,9 +27,9 @@ const CardPizza = ({ id, name, price, ingredients, desc, url }) => {
         </li>
       </ul>
       <div className='card-body d-flex justify-content-between'>
-        <a href='#' className='btn btn-light'>
+        <Link to={`/Pizza/${id}`} className='btn btn-light'>
           Ver Más 👀
-        </a>
+        </Link>
         <a href='#' className='btn btn-dark'>
           Añadir 🛒
         </a>

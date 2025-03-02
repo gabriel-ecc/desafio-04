@@ -12,6 +12,7 @@ import Cart from "./pages/Cart";
 import Pizza from "./pages/Pizza";
 import NotFound from "./components/NotFound";
 
+
 function App() {
   return (
     <div className='container'>
@@ -24,7 +25,7 @@ function App() {
             <Route path='/Register' element={<Register />} />
             <Route path='/Login' element={<Login />} />
             <Route path='/Cart' element={<Cart />} />
-            <Route path='/Pizza/p001' element={<Pizza />} />
+            <Route path='/Pizza/:id' element={<Pizza />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
           <Footer />

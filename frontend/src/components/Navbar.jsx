@@ -28,7 +28,7 @@ const Navbar = () => {
                 🍕 Home
               </Link>
             </li>
-            {token ? botonesTrue() : botonesFalse()}
+            { botonesTrue() }{ botonesFalse()}
           </ul>
           <span className='nav-item'>
             <Link to='/Cart' className='nav-link'>

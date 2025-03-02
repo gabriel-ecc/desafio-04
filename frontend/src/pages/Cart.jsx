@@ -13,15 +13,15 @@ const Cart = () => {
     p.count += 1;
     const nuevaLista = miCarrito.filter((pizza) => pizza.id != p.id);
     setMiCarrito([...nuevaLista, p]);
-    setTotalCarrito(updateTotal(miCarrito))
+    setTotalCarrito(updateTotal(miCarrito));
   };
 
   const diminuirCantidad = (p) => {
-    if (p.count > 0) {
-      p.count -= 1;
-      const nuevaLista = miCarrito.filter((pizza) => pizza.id != p.id);
-      setMiCarrito([...nuevaLista, p]);
-      setTotalCarrito(updateTotal(miCarrito))
+    p.count -= 1;
+    const nuevaLista = miCarrito.filter((pizza) => pizza.id != p.id);
+    setMiCarrito([...nuevaLista, p]);
+    if (p.count == 0) {
+      setMiCarrito([...nuevaLista]);
     }
   };
 
@@ -38,22 +38,26 @@ const Cart = () => {
   return (
     <>
       <div id='carrito' className='p-2'>
-        {productosOrdenados.map(p => (
-          <div className='card mb-3' key={p.id}>
+        <h2 className='fs-1 text-info'>Mi Carrito de compras</h2>
+        {productosOrdenados.map((p) => (
+          <div className='card mb-3 w-50' key={p.id}>
             <div className='row g-0'>
               <div className='col-md-4'>
-                <img src={p.img} className='img-fluid rounded-start' />
+                <img src={p.img} className='w-75 rounded-start img-thumbnail' />
               </div>
               <div className='col-md-8'>
                 <div className='card-body d-flex justify-content-around align-self-center'>
-                  <h5 className='card-title'>{p.name}</h5>
+                  <h5 className='card-title text-capitalize'>{p.name}</h5>
                   <p className='card-text'>
                     ${p.price.toLocaleString("es-cl")}
                   </p>
                   <button
                     type='button'
                     className='btn btn-danger'
-                    onClick={() => diminuirCantidad(p)}>
+                    onClick={() => {
+                      diminuirCantidad(p);
+                      setTotalCarrito(updateTotal(miCarrito));
+                    }}>
                     -
                   </button>
                   <p className='card-text'>{p.count}</p>

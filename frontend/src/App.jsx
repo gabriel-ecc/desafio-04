@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import Cart from "./pages/Cart";
 import Pizza from "./pages/Pizza";
 import NotFound from "./components/NotFound";
+import Profile from "./components/Profile";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route path='/Register' element={<Register />} />
             <Route path='/Login' element={<Login />} />
             <Route path='/Cart' element={<Cart />} />
+            <Route path='/Profile' element={<Profile />} />
             <Route path='/Pizza/:id' element={<Pizza />} />
             <Route path='*' element={<NotFound />} />
           </Routes>

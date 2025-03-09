@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { PizzaContext } from "../contexts/pizzas-content";
 
 const Profile = () => {
+  const { tokenLogin, setTokenLogin } = useContext(PizzaContext);
+  const cerrarSesion = () => {
+    console.log('Cerrando sesión...');
+    setTokenLogin(false);
+  };
+
   return (
     <div class='card text-center d-inline-flex m-2'>
       <div class='card-header'>
@@ -25,7 +33,10 @@ const Profile = () => {
       <div class='card-body'>
         <h5 class='card-title'>Mis datos</h5>
         <p class='card-text'>Correo: desafio@desafio.cl</p>
-        <Link to='/Home' className='btn btn-primary'>
+        <Link
+          to='/Home'
+          className='btn btn-primary'
+          onClick={() => cerrarSesion()}>
           Cerrar Sesión
         </Link>
       </div>

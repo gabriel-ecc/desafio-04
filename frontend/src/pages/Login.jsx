@@ -2,11 +2,14 @@ import { useState } from "react";
 import "../App.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useContext } from "react";
+import { PizzaContext } from "../contexts/pizzas-content";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassWord] = useState("");
   const [error, setError] = useState(false);
+  const { tokenLogin, setTokenLogin } = useContext(PizzaContext);
 
   const validarDatos = (e) => {
     e.preventDefault();
@@ -16,6 +19,7 @@ const Login = () => {
       setError(false);
       setEmail("");
       setPassWord("");
+      setTokenLogin(true);
     } else {
       setError("Datos no son validos");
       return;
@@ -27,7 +31,9 @@ const Login = () => {
       <form className='formulario p-2' onSubmit={validarDatos}>
         {error && <p style={{ color: "red" }}>{error}</p>}
         <div className='mb-3'>
-          <label className='form-label text-light'>Email</label>
+          <label className='form-label text-light'>
+            Email (test: desafio@desafio)
+          </label>
           <input
             type='email'
             name='mail'
@@ -39,7 +45,9 @@ const Login = () => {
           />
         </div>
         <div className='mb-3'>
-          <label className='form-label text-light'>Contraseña</label>
+          <label className='form-label text-light'>
+            Contraseña (test: desafio)
+          </label>
           <input
             type='password'
             name='pass'

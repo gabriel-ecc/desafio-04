@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { PizzaContext } from "../contexts/pizzas-content";
 
 const Navbar = () => {
+  const { tokenLogin, setTokenLogin } = useContext(PizzaContext);
   const total = 25000;
-  const token = true;
 
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary rounded '>
@@ -28,7 +30,7 @@ const Navbar = () => {
                 🍕 Home
               </Link>
             </li>
-            { botonesTrue() }{ botonesFalse()}
+            { tokenLogin ? botonesTrue() : botonesFalse()}
           </ul>
           <span className='nav-item'>
             <Link to='/Cart' className='nav-link'>

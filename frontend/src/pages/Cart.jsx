@@ -1,15 +1,11 @@
 import { useContext, useMemo } from "react";
-import { pizzaCart } from "../assets/js/pizzas";
+
 import { PizzaContext } from "../contexts/pizzas-content";
 
 const Cart = () => {
   const { carroCompras, setCarroCompras, setTotalCarro } =
     useContext(PizzaContext);
 
-  // Inicializa el carrito solo una vez usando useMemo
-  useMemo(() => {
-    setCarroCompras(pizzaCart);
-  }, [setCarroCompras]);
 
   const agregarCantidad = (p) => {
     setCarroCompras((prevCarroCompras) => {
@@ -29,13 +25,13 @@ const Cart = () => {
           if (pizza.id === p.id) {
             const nuevoCount = pizza.count - 1;
             if (nuevoCount <= 0) {
-              return null; // Indica que se debe eliminar
+              return null;
             }
             return { ...pizza, count: nuevoCount };
           }
           return pizza;
         })
-        .filter(Boolean); // Elimina los elementos null
+        .filter(Boolean);
     });
   };
 
@@ -72,7 +68,7 @@ const Cart = () => {
               </div>
               <div className='col-md-8'>
                 <div className='card-body d-flex justify-content-around align-self-center'>
-                <h5 className='card-title text-capitalize'>{p.name}</h5>
+                  <h5 className='card-title text-capitalize'>{p.name}</h5>
                   <p className='card-text'>
                     ${p.price.toLocaleString("es-cl")}
                   </p>

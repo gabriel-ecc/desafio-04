@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { PizzaContext } from "../contexts/pizzas-content";
 
 const CardPizza = ({ id, name, price, ingredients, desc, url }) => {
+
+
+
+
   return (
     <div className='card col-12 col-sm-6 col-md-4 mb-4' key={id}>
       <img src={url} className='card-img-top' alt={name} />

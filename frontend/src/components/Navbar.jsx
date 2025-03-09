@@ -4,6 +4,7 @@ import { PizzaContext } from "../contexts/pizzas-content";
 
 const Navbar = () => {
   const { tokenLogin, setTokenLogin } = useContext(PizzaContext);
+  const { totalCarro, setTotalCarro } = useContext(PizzaContext);
   const total = 25000;
 
   return (
@@ -34,7 +35,7 @@ const Navbar = () => {
           </ul>
           <span className='nav-item'>
             <Link to='/Cart' className='nav-link'>
-              🛒 Total: ${total.toLocaleString("es-cl")}
+              🛒 Total: ${totalCarro.toLocaleString("es-cl")}
             </Link>
           </span>
         </div>

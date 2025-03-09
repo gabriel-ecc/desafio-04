@@ -5,8 +5,10 @@ import { PizzaContext } from "../contexts/pizzas-content";
 const Cart = () => {
   const { carroCompras, setCarroCompras } = useContext(PizzaContext);
   const { totalCarro, setTotalCarro } = useContext(PizzaContext);
-  const [miCarrito, setMiCarrito] = useState(pizzaCart);
-  const [totalCarrito, setTotalCarrito] = useState(updateTotal(miCarrito));
+  
+  setCarroCompras(pizzaCart);
+  updateTotal(carroCompras);
+  
 
   const handleChange = (e) => {
     setPizza((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -14,21 +16,21 @@ const Cart = () => {
 
   const agregarCantidad = (p) => {
     p.count += 1;
-    const nuevaLista = miCarrito.filter((pizza) => pizza.id != p.id);
-    setMiCarrito([...nuevaLista, p]);
-    setTotalCarrito(updateTotal(miCarrito));
+    const nuevaLista = carroCompras.filter((pizza) => pizza.id != p.id);
+    setCarroCompras([...nuevaLista, p]);
+    setTotalCarro(updateTotal(carroCompras));
   };
 
   const diminuirCantidad = (p) => {
     p.count -= 1;
-    const nuevaLista = miCarrito.filter((pizza) => pizza.id != p.id);
-    setMiCarrito([...nuevaLista, p]);
+    const nuevaLista = carroCompras.filter((pizza) => pizza.id != p.id);
+    setCarroCompras([...nuevaLista, p]);
     if (p.count <= 0) {
-      setMiCarrito([...nuevaLista]);
+      setCarroCompras([...nuevaLista]);
     }
   };
 
-  const productosOrdenados = [...miCarrito].sort((a, b) => {
+  const productosOrdenados = [...carroCompras].sort((a, b) => {
     if (a.id < b.id) {
       return -1;
     }
@@ -59,7 +61,7 @@ const Cart = () => {
                     className='btn btn-danger'
                     onClick={() => {
                       diminuirCantidad(p);
-                      setTotalCarrito(updateTotal(miCarrito));
+                      setTotalCarro(updateTotal(carroCompras));
                     }}>
                     -
                   </button>
@@ -77,7 +79,7 @@ const Cart = () => {
         ))}
       </div>
       <p className='fs-1 text-info'>
-        Total: ${totalCarrito.toLocaleString("es-cl")}
+        Total: ${totalCarro.toLocaleString("es-cl")}
       </p>
     </>
   );
@@ -86,6 +88,7 @@ const Cart = () => {
 export default Cart;
 
 const updateTotal = (lista) => {
+  console.log('revision del cambio')
   let monto = 0;
   for (const pizza of lista) {
     monto += pizza.count * pizza.price;

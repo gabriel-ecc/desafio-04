@@ -1,15 +1,16 @@
 import Header from "../components/Header";
 import CardPizza from "../components/CardPizza";
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
+import { PizzaContext } from "../contexts/pizzas-content";
 
 const Home = () => {
   const urlApi = "http://localhost:5000/api/pizzas";
-  const [listaPizzas, setListaPizzas] = useState([]);
+  const { menuPizzas, setMenuPizzas } = useContext(PizzaContext);
 
   const getPizzas = async (url) => {
     const res = await fetch(url);
     const data = await res.json();
-    return setListaPizzas(data);
+    return setMenuPizzas(data);
   };
 
   useEffect(() => {
@@ -20,7 +21,7 @@ const Home = () => {
     <>
       <Header />
       <div className='d-flex flex-wrap justify-content-around p-1 home-background'>
-        {listaPizzas.map((pizza) => (
+        {menuPizzas.map((pizza) => (
           <CardPizza
             id={pizza.id}
             name={pizza.name}

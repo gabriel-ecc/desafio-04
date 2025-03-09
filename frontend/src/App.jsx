@@ -12,6 +12,7 @@ import Cart from "./pages/Cart";
 import Pizza from "./pages/Pizza";
 import NotFound from "./components/NotFound";
 import Profile from "./components/Profile";
+import PizzaProvider from "./contexts/pizzas-content";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
     <div className='container'>
       <div className='row align-items-start'>
         <div className='col'>
+          <PizzaProvider>
           <Navbar />
           <Routes>
             <Route path='/' element={<Home />} />
@@ -31,6 +33,7 @@ function App() {
             <Route path='*' element={<NotFound />} />
           </Routes>
           <Footer />
+          </PizzaProvider>
         </div>
       </div>
     </div>

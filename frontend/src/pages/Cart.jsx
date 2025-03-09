@@ -1,44 +1,64 @@
-import { useState, useContext } from "react";
+import { useContext, useMemo } from "react";
 import { pizzaCart } from "../assets/js/pizzas";
 import { PizzaContext } from "../contexts/pizzas-content";
 
 const Cart = () => {
-  const { carroCompras, setCarroCompras } = useContext(PizzaContext);
-  const { totalCarro, setTotalCarro } = useContext(PizzaContext);
-  
-  setCarroCompras(pizzaCart);
-  updateTotal(carroCompras);
-  
+  const { carroCompras, setCarroCompras, setTotalCarro } =
+    useContext(PizzaContext);
 
-  const handleChange = (e) => {
-    setPizza((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  };
+  // Inicializa el carrito solo una vez usando useMemo
+  useMemo(() => {
+    setCarroCompras(pizzaCart);
+  }, [setCarroCompras]);
 
   const agregarCantidad = (p) => {
-    p.count += 1;
-    const nuevaLista = carroCompras.filter((pizza) => pizza.id != p.id);
-    setCarroCompras([...nuevaLista, p]);
-    setTotalCarro(updateTotal(carroCompras));
+    setCarroCompras((prevCarroCompras) => {
+      return prevCarroCompras.map((pizza) => {
+        if (pizza.id === p.id) {
+          return { ...pizza, count: pizza.count + 1 };
+        }
+        return pizza;
+      });
+    });
   };
 
   const diminuirCantidad = (p) => {
-    p.count -= 1;
-    const nuevaLista = carroCompras.filter((pizza) => pizza.id != p.id);
-    setCarroCompras([...nuevaLista, p]);
-    if (p.count <= 0) {
-      setCarroCompras([...nuevaLista]);
-    }
+    setCarroCompras((prevCarroCompras) => {
+      return prevCarroCompras
+        .map((pizza) => {
+          if (pizza.id === p.id) {
+            const nuevoCount = pizza.count - 1;
+            if (nuevoCount <= 0) {
+              return null; // Indica que se debe eliminar
+            }
+            return { ...pizza, count: nuevoCount };
+          }
+          return pizza;
+        })
+        .filter(Boolean); // Elimina los elementos null
+    });
   };
 
-  const productosOrdenados = [...carroCompras].sort((a, b) => {
-    if (a.id < b.id) {
-      return -1;
+  const productosOrdenados = useMemo(() => {
+    return [...carroCompras].sort((a, b) => {
+      if (a.id < b.id) return -1;
+      if (a.id > b.id) return 1;
+      return 0;
+    });
+  }, [carroCompras]);
+
+  const totalCarro = useMemo(() => {
+    let monto = 0;
+    for (const pizza of carroCompras) {
+      monto += pizza.count * pizza.price;
     }
-    if (a.id > b.id) {
-      return 1;
-    }
-    return 0;
-  });
+    return monto;
+  }, [carroCompras]);
+
+  // Actualiza el total en el contexto solo cuando cambia el total calculado
+  useMemo(() => {
+    setTotalCarro(totalCarro);
+  }, [totalCarro, setTotalCarro]);
 
   return (
     <>
@@ -52,17 +72,14 @@ const Cart = () => {
               </div>
               <div className='col-md-8'>
                 <div className='card-body d-flex justify-content-around align-self-center'>
-                  <h5 className='card-title text-capitalize'>{p.name}</h5>
+                <h5 className='card-title text-capitalize'>{p.name}</h5>
                   <p className='card-text'>
                     ${p.price.toLocaleString("es-cl")}
                   </p>
                   <button
                     type='button'
                     className='btn btn-danger'
-                    onClick={() => {
-                      diminuirCantidad(p);
-                      setTotalCarro(updateTotal(carroCompras));
-                    }}>
+                    onClick={() => diminuirCantidad(p)}>
                     -
                   </button>
                   <p className='card-text'>{p.count}</p>
@@ -86,12 +103,3 @@ const Cart = () => {
 };
 
 export default Cart;
-
-const updateTotal = (lista) => {
-  console.log('revision del cambio')
-  let monto = 0;
-  for (const pizza of lista) {
-    monto += pizza.count * pizza.price;
-  }
-  return monto;
-};

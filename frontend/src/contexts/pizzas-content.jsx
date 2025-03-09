@@ -14,6 +14,18 @@ const PizzaProvider = ({ children }) => {
     return monto;
   });
 
+  const urlApi = "http://localhost:5000/api/pizzas";
+
+  const getPizzas = async (url) => {
+    const res = await fetch(url);
+    const data = await res.json();
+    return setMenuPizzas(data);
+  };
+
+  useEffect(() => {
+    getPizzas(urlApi);
+  }, []);
+
   return (
     <PizzaContext.Provider
       value={{

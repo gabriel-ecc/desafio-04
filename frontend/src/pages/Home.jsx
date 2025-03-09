@@ -4,18 +4,9 @@ import { useEffect, useContext } from "react";
 import { PizzaContext } from "../contexts/pizzas-content";
 
 const Home = () => {
-  const urlApi = "http://localhost:5000/api/pizzas";
+  
   const { menuPizzas, setMenuPizzas } = useContext(PizzaContext);
-
-  const getPizzas = async (url) => {
-    const res = await fetch(url);
-    const data = await res.json();
-    return setMenuPizzas(data);
-  };
-
-  useEffect(() => {
-    getPizzas(urlApi);
-  }, []);
+  
 
   return (
     <>
@@ -28,7 +19,7 @@ const Home = () => {
             price={pizza.price}
             ingredients={pizza.ingredients}
             desc={pizza.desc}
-            url={pizza.img}
+            img={pizza.img}
           />
         ))}
       </div>

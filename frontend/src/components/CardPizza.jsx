@@ -1,14 +1,43 @@
 import { Link } from "react-router-dom";
 import { PizzaContext } from "../contexts/pizzas-content";
+import { useContext } from "react";
 
-const CardPizza = ({ id, name, price, ingredients, desc, url }) => {
+const CardPizza = ({ id, name, price, ingredients, desc, img }) => {
+  const { carroCompras, setCarroCompras, setTotalCarro } =
+    useContext(PizzaContext);
 
+  const agregarAlCarrito = () => {
+    const pizzaToAdd = {
+      id,
+      name,
+      price,
+      ingredients,
+      desc,
+      img,
+      count: 1, // Inicializamos el contador en 1
+    };
 
+    // Actualizamos el carro de compras de manera inmutable
+    setCarroCompras((prevCarroCompras) => {
+      const pizzaExistente = prevCarroCompras.find(
+        (pizza) => pizza.id.toLowerCase() === id.toLowerCase()
+      );
+      if (pizzaExistente) {
+        return prevCarroCompras.map((pizza) =>
+          pizza.id.toLowerCase() === id.toLowerCase() ? { ...pizza, count: pizza.count + 1 } : pizza
+        );
+      } else {
+        return [...prevCarroCompras, pizzaToAdd];
+      }
+    });
 
+    // Actualizamos el total del carro
+    setTotalCarro((prevTotal) => prevTotal + price);
+  };
 
   return (
     <div className='card col-12 col-sm-6 col-md-4 mb-4' key={id}>
-      <img src={url} className='card-img-top' alt={name} />
+      <img src={img} className='card-img-top' alt={name} />
       <div className='card-body'>
         <h5 className='card-title fw-semibold fs-5'>Pizza {name}</h5>
       </div>
@@ -35,7 +64,7 @@ const CardPizza = ({ id, name, price, ingredients, desc, url }) => {
         <Link to={`/Pizza/${id}`} className='btn btn-light'>
           Ver Más 👀
         </Link>
-        <a href='#' className='btn btn-dark'>
+        <a className='btn btn-dark' onClick={agregarAlCarrito}>
           Añadir 🛒
         </a>
       </div>
@@ -45,5 +74,9 @@ const CardPizza = ({ id, name, price, ingredients, desc, url }) => {
 export default CardPizza;
 
 const renderIngredients = (ingredients = []) => {
-  return ingredients.map((i) => <li className='list-group-item'>🍕 {i}</li>);
+  return ingredients.map((i, index) => (
+    <li className='list-group-item' key={index}>
+      🍕 {i}
+    </li>
+  ));
 };

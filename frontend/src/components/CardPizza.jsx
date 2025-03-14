@@ -3,7 +3,7 @@ import { PizzaContext } from "../contexts/pizzasContext";
 import { useContext } from "react";
 
 const CardPizza = ({ id, name, price, ingredients, desc, img }) => {
-  const { carroCompras, setCarroCompras, setTotalCarro } =
+  const { setCarroCompras, setTotalCarro } =
     useContext(PizzaContext);
 
   const agregarAlCarrito = () => {

@@ -1,11 +1,11 @@
 import Header from "../components/Header";
 import CardPizza from "../components/CardPizza";
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import { PizzaContext } from "../contexts/pizzasContext";
 
 const Home = () => {
   
-  const { menuPizzas, setMenuPizzas } = useContext(PizzaContext);
+  const { menuPizzas } = useContext(PizzaContext);
   
 
   return (

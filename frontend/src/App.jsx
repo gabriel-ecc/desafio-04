@@ -13,7 +13,10 @@ import Pizza from "./pages/Pizza";
 import NotFound from "./components/NotFound";
 import Profile from "./components/Profile";
 import PizzaProvider from "./contexts/pizzasContext";
-import ProtectedRoute from "./components/ProtectedRoute";
+import {
+  ProtectedProfileRoute,
+  ProtectedLoginRoute,
+} from "./components/ProtectedRoute";
 import UserProvider from "./contexts/userContext";
 
 function App() {
@@ -27,15 +30,29 @@ function App() {
               <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/Home' element={<Home />} />
-                <Route path='/Register' element={<Register />} />
-                <Route path='/Login' element={<Login />} />
+                <Route
+                  path='/Register'
+                  element={
+                    <ProtectedLoginRoute>
+                      <Register />
+                    </ProtectedLoginRoute>
+                  }
+                />
+                <Route
+                  path='/Login'
+                  element={
+                    <ProtectedLoginRoute>
+                      <Login />
+                    </ProtectedLoginRoute>
+                  }
+                />
                 <Route path='/Cart' element={<Cart />} />
                 <Route
                   path='/Profile'
                   element={
-                    <ProtectedRoute>
+                    <ProtectedProfileRoute>
                       <Profile />
-                    </ProtectedRoute>
+                    </ProtectedProfileRoute>
                   }
                 />
                 <Route path='/Pizza/:id' element={<Pizza />} />

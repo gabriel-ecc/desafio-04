@@ -3,13 +3,13 @@ import "../App.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useContext } from "react";
-import { PizzaContext } from "../contexts/pizzasContext";
+import { UserContext } from "../contexts/userContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassWord] = useState("");
   const [error, setError] = useState(false);
-  const { tokenLogin, setTokenLogin } = useContext(PizzaContext);
+  const { setTokenLogin } = useContext(UserContext);
 
   const validarDatos = (e) => {
     e.preventDefault();

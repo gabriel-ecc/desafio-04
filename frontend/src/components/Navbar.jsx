@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import React, { useContext } from 'react';
 import { PizzaContext } from "../contexts/pizzasContext";
+import { UserContext } from "../contexts/userContext";
+
 
 const Navbar = () => {
-  const { tokenLogin } = useContext(PizzaContext);
+  const { tokenLogin } = useContext(UserContext);
   const { totalCarro } = useContext(PizzaContext);
 
   return (
@@ -26,14 +28,14 @@ const Navbar = () => {
         <div className='collapse navbar-collapse' id='navbarText'>
           <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
             <li className='nav-item'>
-              <Link to='/Home' className='nav-link'>
+              <Link to='/Home' className='btn btn-info m-2'>
                 🍕 Home
               </Link>
             </li>
-            { tokenLogin ? botonesTrue() : botonesFalse()}
+            {tokenLogin ? botonesTrue() : botonesFalse()}
           </ul>
           <span className='nav-item'>
-            <Link to='/Cart' className='nav-link'>
+            <Link to='/Cart' className='btn btn-info m-2'>
               🛒 Total: ${totalCarro.toLocaleString("es-cl")}
             </Link>
           </span>
@@ -45,17 +47,21 @@ const Navbar = () => {
 export default Navbar;
 
 const botonesTrue = () => {
+  const { LogOut } = useContext(UserContext);
   return (
     <>
       <li className='nav-item'>
-        <Link to='/Profile' className='nav-link'>
+        <Link to='/Profile' className='btn btn-info m-2'>
           🧰 Profile
         </Link>
       </li>
       <li className='nav-item'>
-        <Link to='/Logout' className='nav-link'>
+        <button
+          type='button'
+          className='btn btn-info m-2'
+          onClick={LogOut}>
           🚪 Logout
-        </Link>
+        </button>
       </li>
     </>
   );
@@ -65,12 +71,12 @@ const botonesFalse = () => {
   return (
     <>
       <li className='nav-item'>
-        <Link to='/Login' className='nav-link'>
+        <Link to='/Login' className='btn btn-info m-2'>
           🔐 Login
         </Link>
       </li>
       <li className='nav-item'>
-        <Link to='/Register' className='nav-link'>
+        <Link to='/Register' className='btn btn-info m-2'>
           🔐 Register
         </Link>
       </li>

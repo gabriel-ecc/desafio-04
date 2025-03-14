@@ -4,7 +4,7 @@ import { pizzaCart } from "../assets/js/pizzas";
 export const PizzaContext = createContext();
 const PizzaProvider = ({ children }) => {
   const [menuPizzas, setMenuPizzas] = useState([]);
-  const [tokenLogin, setTokenLogin] = useState(true);
+  
   const [carroCompras, setCarroCompras] = useState(pizzaCart);
   const [totalCarro, setTotalCarro] = useState(() => {
     let monto = 0;
@@ -31,8 +31,6 @@ const PizzaProvider = ({ children }) => {
       value={{
         menuPizzas,
         setMenuPizzas,
-        tokenLogin,
-        setTokenLogin,
         carroCompras,
         setCarroCompras,
         totalCarro,

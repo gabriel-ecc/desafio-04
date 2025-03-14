@@ -13,7 +13,8 @@ import Pizza from "./pages/Pizza";
 import NotFound from "./components/NotFound";
 import Profile from "./components/Profile";
 import PizzaProvider from "./contexts/pizzasContext";
-
+import ProtectedRoute from "./components/ProtectedRoute";
+import UserProvider from "./contexts/userContext";
 
 function App() {
   return (
@@ -21,18 +22,27 @@ function App() {
       <div className='row align-items-start'>
         <div className='col'>
           <PizzaProvider>
-          <Navbar />
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/Home' element={<Home />} />
-            <Route path='/Register' element={<Register />} />
-            <Route path='/Login' element={<Login />} />
-            <Route path='/Cart' element={<Cart />} />
-            <Route path='/Profile' element={<Profile />} />
-            <Route path='/Pizza/:id' element={<Pizza />} />
-            <Route path='*' element={<NotFound />} />
-          </Routes>
-          <Footer />
+            <UserProvider>
+              <Navbar />
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/Home' element={<Home />} />
+                <Route path='/Register' element={<Register />} />
+                <Route path='/Login' element={<Login />} />
+                <Route path='/Cart' element={<Cart />} />
+                <Route
+                  path='/Profile'
+                  element={
+                    <ProtectedRoute>
+                      <Profile />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path='/Pizza/:id' element={<Pizza />} />
+                <Route path='*' element={<NotFound />} />
+              </Routes>
+              <Footer />
+            </UserProvider>
           </PizzaProvider>
         </div>
       </div>

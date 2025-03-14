@@ -8,13 +8,10 @@ const UserProvider = ({ children }) => {
     setTokenLogin(false);
   };
 
-  const userStruct = {
-    tokenLogin,
-    LogOut,
-  };
-
   return (
-    <UserContext.Provider value={userStruct}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ tokenLogin, LogOut, setTokenLogin }}>
+      {children}
+    </UserContext.Provider>
   );
 };
 

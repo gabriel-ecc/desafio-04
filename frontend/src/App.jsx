@@ -12,7 +12,7 @@ import Cart from "./pages/Cart";
 import Pizza from "./pages/Pizza";
 import NotFound from "./components/NotFound";
 import Profile from "./components/Profile";
-import PizzaProvider from "./contexts/pizzas-content";
+import PizzaProvider from "./contexts/pizzasContext";
 
 
 function App() {

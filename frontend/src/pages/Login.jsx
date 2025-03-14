@@ -3,7 +3,7 @@ import "../App.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useContext } from "react";
-import { PizzaContext } from "../contexts/pizzas-content";
+import { PizzaContext } from "../contexts/pizzasContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");

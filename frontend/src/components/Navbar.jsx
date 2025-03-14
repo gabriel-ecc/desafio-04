@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { PizzaContext } from "../contexts/pizzas-content";
+import { PizzaContext } from "../contexts/pizzasContext";
 
 const Navbar = () => {
   const { tokenLogin } = useContext(PizzaContext);

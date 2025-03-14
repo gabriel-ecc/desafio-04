@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
 
-import { PizzaContext } from "../contexts/pizzas-content";
+import { PizzaContext } from "../contexts/pizzasContext";
 
 const Cart = () => {
   const { carroCompras, setCarroCompras, setTotalCarro } =

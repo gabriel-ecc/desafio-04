@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import CardPizza from "../components/CardPizza";
 import { useEffect, useContext } from "react";
-import { PizzaContext } from "../contexts/pizzas-content";
+import { PizzaContext } from "../contexts/pizzasContext";
 
 const Home = () => {
   

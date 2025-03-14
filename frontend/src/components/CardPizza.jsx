@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { PizzaContext } from "../contexts/pizzas-content";
+import { PizzaContext } from "../contexts/pizzasContext";
 import { useContext } from "react";
 
 const CardPizza = ({ id, name, price, ingredients, desc, img }) => {

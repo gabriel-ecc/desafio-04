@@ -1,11 +1,12 @@
 import { useContext, useMemo } from "react";
 
 import { PizzaContext } from "../contexts/pizzasContext";
+import { UserContext } from "../contexts/userContext";
 
 const Cart = () => {
   const { carroCompras, setCarroCompras, setTotalCarro } =
     useContext(PizzaContext);
-
+  const { tokenLogin } = useContext(UserContext);
 
   const agregarCantidad = (p) => {
     setCarroCompras((prevCarroCompras) => {
@@ -94,7 +95,17 @@ const Cart = () => {
       <p className='fs-1 text-info'>
         Total: ${totalCarro.toLocaleString("es-cl")}
       </p>
+
+      {tokenLogin ? botonPago() : ""}
     </>
+  );
+};
+
+const botonPago = () => {
+  return (
+    <button type='button' className='btn btn-success m-2'>
+      🛒 Pagar
+    </button>
   );
 };
 

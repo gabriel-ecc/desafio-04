@@ -15,7 +15,6 @@ const Login = () => {
     e.preventDefault();
 
     if (email === "desafio@desafio" && password === "desafio") {
-      alert("LogIn Éxito");
       setError(false);
       setEmail("");
       setPassWord("");

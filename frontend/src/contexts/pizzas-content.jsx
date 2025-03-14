@@ -1,10 +1,10 @@
-import { createContext, useState, useMemo, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import { pizzaCart } from "../assets/js/pizzas";
 
 export const PizzaContext = createContext();
 const PizzaProvider = ({ children }) => {
   const [menuPizzas, setMenuPizzas] = useState([]);
-  const [tokenLogin, setTokenLogin] = useState(false);
+  const [tokenLogin, setTokenLogin] = useState(true);
   const [carroCompras, setCarroCompras] = useState(pizzaCart);
   const [totalCarro, setTotalCarro] = useState(() => {
     let monto = 0;

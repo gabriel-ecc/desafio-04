@@ -3,9 +3,8 @@ import { useContext } from "react";
 import { PizzaContext } from "../contexts/pizzas-content";
 
 const Navbar = () => {
-  const { tokenLogin, setTokenLogin } = useContext(PizzaContext);
-  const { totalCarro, setTotalCarro } = useContext(PizzaContext);
-  const total = 25000;
+  const { tokenLogin } = useContext(PizzaContext);
+  const { totalCarro } = useContext(PizzaContext);
 
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary rounded '>

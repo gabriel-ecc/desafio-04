@@ -9,10 +9,11 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassWord] = useState("");
   const [error, setError] = useState(false);
-  const { setTokenLogin } = useContext(UserContext);
+  const { setTokenLogin, authentication } = useContext(UserContext);
 
-  const validarDatos = (e) => {
+  const validarDatos = async(e) => {
     e.preventDefault();
+    await authentication(email, password);
 
     if (email === "desafio@desafio" && password === "desafio") {
       setError(false);
@@ -31,7 +32,7 @@ const Login = () => {
         {error && <p style={{ color: "red" }}>{error}</p>}
         <div className='mb-3'>
           <label className='form-label text-light'>
-            Email (test: desafio@desafio)
+            Email
           </label>
           <input
             type='email'
@@ -45,7 +46,7 @@ const Login = () => {
         </div>
         <div className='mb-3'>
           <label className='form-label text-light'>
-            Contraseña (test: desafio)
+            Contraseña
           </label>
           <input
             type='password'

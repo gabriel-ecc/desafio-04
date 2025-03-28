@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../contexts/userContext";
 
 const Profile = () => {
-  const { LogOut, userMail, tokenJWT } = useContext(UserContext);
+  const { LogOut, userMail, tokenJWT, autorizacion } = useContext(UserContext);
+
+  useEffect(() => {
+    autorizacion();
+  }, []);
 
   return (
     <>

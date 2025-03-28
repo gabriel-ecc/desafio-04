@@ -1,10 +1,9 @@
 import { createContext, useState } from "react";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
 
 export const UserContext = createContext();
 const UserProvider = ({ children }) => {
-  const [tokenJWT, setTokenJWT] = useState(localStorage.getItem('token'));
+  const [tokenJWT, setTokenJWT] = useState(localStorage.getItem("token"));
   const [userMail, setUserMail] = useState(null);
 
   const authentication = async (userMail, password) => {
@@ -26,6 +25,25 @@ const UserProvider = ({ children }) => {
     }
   };
 
+  const autorizacion = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const url = "http://localhost:5000/api/auth/me";
+        const res = await axios.get(url, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (res.status === 200) {
+          setUserMail(res.data.email);
+          return true;
+        }
+      } catch (error) {
+        console.error(error);
+        return false;
+      }
+    }
+  }
+
   const LogOut = () => {
     setUserMail("");
     setTokenJWT("");
@@ -34,7 +52,7 @@ const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ tokenJWT, LogOut, userMail, authentication }}>
+      value={{ tokenJWT, LogOut, userMail, authentication,autorizacion }}>
       {children}
     </UserContext.Provider>
   );

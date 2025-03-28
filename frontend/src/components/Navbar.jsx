@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
-import React, { useContext } from 'react';
+import React, { useContext, useState } from "react";
 import { PizzaContext } from "../contexts/pizzasContext";
 import { UserContext } from "../contexts/userContext";
 
-
 const Navbar = () => {
-  const { tokenLogin } = useContext(UserContext);
   const { totalCarro } = useContext(PizzaContext);
+  const { tokenJWT } = useContext(UserContext);
 
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary rounded '>
@@ -32,7 +31,7 @@ const Navbar = () => {
                 🍕 Home
               </Link>
             </li>
-            {tokenLogin ? botonesTrue() : botonesFalse()}
+            {tokenJWT ? botonesTrue() : botonesFalse()}
           </ul>
           <span className='nav-item'>
             <Link to='/Cart' className='btn btn-info m-2'>
@@ -56,10 +55,7 @@ const botonesTrue = () => {
         </Link>
       </li>
       <li className='nav-item'>
-        <button
-          type='button'
-          className='btn btn-info m-2'
-          onClick={LogOut}>
+        <button type='button' className='btn btn-info m-2' onClick={LogOut}>
           🚪 Logout
         </button>
       </li>

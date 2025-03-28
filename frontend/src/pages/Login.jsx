@@ -1,63 +1,67 @@
 import { useState } from "react";
 import "../App.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { useContext } from "react";
 import { UserContext } from "../contexts/userContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassWord] = useState("");
+  const [datosFormulario, setDatosFomulario] = useState({
+    email: "",
+    password: "",
+  });
+
   const [error, setError] = useState(false);
-  const { setTokenLogin, authentication } = useContext(UserContext);
+  const { authentication } = useContext(UserContext);
+  const navigate = useNavigate();
 
-  const validarDatos = async(e) => {
+  const handleChange = (e) => {
+    setDatosFomulario({
+      ...datosFormulario,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const validarDatos = async (e) => {
     e.preventDefault();
-    await authentication(email, password);
+    const { email, password } = datosFormulario;
+    const success = await authentication(email, password);
 
-    if (email === "desafio@desafio" && password === "desafio") {
+    if (success) {
       setError(false);
-      setEmail("");
-      setPassWord("");
-      setTokenLogin(true);
+      navigate("/"); // Navigate to the home page after successful login
     } else {
       setError("Datos no son validos");
-      return;
     }
   };
 
   return (
     <>
-      <form className='formulario p-2' onSubmit={validarDatos}>
+      <form className="formulario p-2" onSubmit={validarDatos}>
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <div className='mb-3'>
-          <label className='form-label text-light'>
-            Email
-          </label>
+        <div className="mb-3">
+          <label className="form-label text-light">Email</label>
           <input
-            type='email'
-            name='mail'
-            placeholder='name@example.com'
-            className='form-control'
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            type="email"
+            name="email"
+            placeholder="name@example.com"
+            className="form-control"
+            onChange={handleChange}
+            value={datosFormulario.email}
             required
           />
         </div>
-        <div className='mb-3'>
-          <label className='form-label text-light'>
-            Contraseña
-          </label>
+        <div className="mb-3">
+          <label className="form-label text-light">Contraseña</label>
           <input
-            type='password'
-            name='pass'
-            className='form-control'
-            onChange={(e) => setPassWord(e.target.value)}
-            value={password}
+            type="password"
+            name="password"
+            className="form-control"
+            onChange={handleChange}
+            value={datosFormulario.password}
             required
           />
         </div>
-        <button type='submit' className='btn btn-primary'>
+        <button type="submit" className="btn btn-primary">
           🔓 LogIn
         </button>
       </form>

@@ -1,11 +1,11 @@
 import { createContext, useState } from "react";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 export const UserContext = createContext();
 const UserProvider = ({ children }) => {
-  const [tokenLogin, setTokenLogin] = useState(false);
-  const [tokenJWT, setTokenJWT] = useState("");
-  const [userMail, setUserMail] = useState("");
+  const [tokenJWT, setTokenJWT] = useState(localStorage.getItem('token'));
+  const [userMail, setUserMail] = useState(null);
 
   const authentication = async (userMail, password) => {
     try {
@@ -13,22 +13,28 @@ const UserProvider = ({ children }) => {
       const payload = { email: userMail, password };
       const user = await axios.post(url, payload);
       console.log("user", user);
-      localStorage.setItem("token", user.data.token);
       console.log("user", user.data);
       if (user.status === 200) {
+        setUserMail(user.data.email);
+        setTokenJWT(user.data.token);
+        localStorage.setItem("token", user.data.token);
+        return true;
       }
     } catch (error) {
       console.error(error);
+      return false;
     }
   };
 
   const LogOut = () => {
-    setTokenLogin(false);
+    setUserMail("");
+    setTokenJWT("");
+    localStorage.removeItem("token");
   };
 
   return (
     <UserContext.Provider
-      value={{ tokenLogin, LogOut, setTokenLogin, authentication }}>
+      value={{ tokenJWT, LogOut, userMail, authentication }}>
       {children}
     </UserContext.Provider>
   );

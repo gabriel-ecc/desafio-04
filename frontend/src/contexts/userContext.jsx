@@ -42,7 +42,23 @@ const UserProvider = ({ children }) => {
         return false;
       }
     }
-  }
+  };
+
+  const registrarUsuario = async (userMail, password) => {
+    try {
+      const url = "http://localhost:5000/api/auth/register";
+      const res = await axios.post(url, { email: userMail, password });
+      if (res.status === 200) {
+        setUserMail(res.data.email);
+        setTokenJWT(res.data.token);
+        localStorage.setItem("token", res.data.token);
+        return true;
+      }
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  };
 
   const LogOut = () => {
     setUserMail("");
@@ -52,7 +68,14 @@ const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ tokenJWT, LogOut, userMail, authentication,autorizacion }}>
+      value={{
+        tokenJWT,
+        LogOut,
+        userMail,
+        authentication,
+        autorizacion,
+        registrarUsuario,
+      }}>
       {children}
     </UserContext.Provider>
   );

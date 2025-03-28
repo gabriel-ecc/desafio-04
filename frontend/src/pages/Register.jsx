@@ -1,16 +1,30 @@
 import { useState } from "react";
 import "../App.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import { useContext } from "react";
+import { UserContext } from "../contexts/userContext";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassWord] = useState("");
-  const [password2, setPassWord2] = useState("");
-  const [error, setError] = useState(false);
+  const [datosFormulario, setDatosFomulario] = useState({
+    email: "",
+    password: "",
+    password2: "",
+  });
 
-  const validarDatos = (e) => {
+  const [error, setError] = useState(false);
+  const { registrarUsuario } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setDatosFomulario({
+      ...datosFormulario,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const validarDatos = async (e) => {
     e.preventDefault();
+    const { email, password, password2 } = datosFormulario;
 
     if (email === "" || password === "" || password2 === "") {
       setError("Todos los datos son necesarios");
@@ -20,11 +34,8 @@ const Register = () => {
       setError("Las contraseñas no coinciden");
       return;
     }
-    alert("Cuenta Creada con Éxito");
-    setError(false);
-    setEmail("");
-    setPassWord("");
-    setPassWord2("");
+    const success = await registrarUsuario(email, password);
+    success ? navigate("/") : setError("falla en el registro");
   };
 
   return (
@@ -35,11 +46,11 @@ const Register = () => {
           <label className='form-label text-light'>Email</label>
           <input
             type='email'
-            name='mail'
+            name='email'
             placeholder='name@example.com'
             className='form-control'
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            onChange={handleChange}
+            value={datosFormulario.email}
             required
           />
         </div>
@@ -47,11 +58,11 @@ const Register = () => {
           <label className='form-label text-light'>Contraseña</label>
           <input
             type='password'
-            name='pass'
+            name='password'
             className='form-control'
             minLength='6'
-            onChange={(e) => setPassWord(e.target.value)}
-            value={password}
+            onChange={handleChange}
+            value={datosFormulario.password}
             required
           />
         </div>
@@ -59,11 +70,11 @@ const Register = () => {
           <label className='form-label text-light'>Confirmar Contraseña</label>
           <input
             type='password'
-            name='pass2'
+            name='password2'
             className='form-control'
             minLength='6'
-            onChange={(e) => setPassWord2(e.target.value)}
-            value={password2}
+            onChange={handleChange}
+            value={datosFormulario.password2}
             required
           />
         </div>
